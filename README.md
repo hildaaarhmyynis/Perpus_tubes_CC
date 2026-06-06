@@ -6,32 +6,30 @@
 
 ## 🏗️ Arsitektur Sistem (3-Tier Architecture)
 [ Browser Pengguna / Internet ]
-                    │
-                    ▼
-     ┌──────────────────────────────┐
-     │     VM1 — Web Server         │  ◀── Presentation Layer
-     │     Apache2 + PHP 8.x        │
-     │     Port: 80 / 443 (HTTPS)   │
-     │     IP: 192.168.1.11         │
-     └──────────────┬───────────────┘
-                    │ Internal Network
-                    ▼
-     ┌──────────────────────────────┐
-     │     VM2 — App Server         │  ◀── Business Logic Layer
-     │     PHP-FPM + Composer       │
-     │     Port: 9000               │
-     │     IP: 192.168.1.12         │
-     └──────────────┬───────────────┘
-                    │ Internal Network
-                    ▼
-     ┌──────────────────────────────┐
-     │     VM3 — Database Server    │  ◀── Data Layer
-     │     MySQL 8.x / MariaDB      │
-     │     Port: 3306 (internal)    │
-     │     IP: 192.168.1.13         │
-     └──────────────────────────────┘
-     ---
-
+                        │
+                        ▼
+         ┌──────────────────────────────┐
+         │     VM1 — Web Server         │  ◀── Presentation Layer
+         │     Apache2 + PHP 8.x        │
+         │     Port: 80 / 443 (HTTPS)   │
+         │     IP: 192.168.1.11         │
+         └──────────────┬───────────────┘
+                        │ Internal Network
+                        ▼
+         ┌──────────────────────────────┐
+         │     VM2 — App Server         │  ◀── Business Logic Layer
+         │     PHP-FPM + Composer       │
+         │     Port: 9000               │
+         │     IP: 192.168.1.12         │
+         └──────────────┬───────────────┘
+                        │ Internal Network
+                        ▼
+         ┌──────────────────────────────┐
+         │     VM3 — Database Server    │  ◀── Data Layer
+         │     MySQL 8.x / MariaDB      │
+         │     Port: 3306 (internal)    │
+         │     IP: 192.168.1.13         │
+         └──────────────────────────────┘
 ## 🖥️ VM1 — Web Server *(Presentation Layer)*
 
 **OS:** Ubuntu Server 22.04 LTS | **Software:** Apache2 + PHP 8.x | **IP:** `192.168.1.11` | **Port:** `80`, `443`
