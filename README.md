@@ -351,7 +351,7 @@ exit
 
 ---
 
-## ⚙️ Langkah 7 — Setup VM2 (Backend)
+##  Langkah 7 — Setup VM2 (Backend)
 
 ```bash
 # SSH ke VM2
