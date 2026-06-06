@@ -17,7 +17,6 @@
 
 </div>
 
----
 ##  II. Arsitektur Sistem (3-Tier Architecture)
 
 ```
