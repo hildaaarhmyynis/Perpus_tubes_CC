@@ -5,21 +5,25 @@
 ---
 ## I. Tim Pengembang
 
+<div align="center">
+
 | Nama | NIM |
 |------|-----|
 | Hilda Rahmayani S | 101032400010 |
 | Farah Fadhilah | 101032430007 |
 | Saraya Abharina | 101032400191 |
 
->  Tugas Besar Komputasi Awan — Universitas Telkom
+> Tugas Besar Komputasi Awan
+
+</div>
 
 ---
 ##  II. Arsitektur Sistem (3-Tier Architecture)
 
 ```
-[ Browser / Internet ]
-         │
-         ▼
+         [ Browser / Internet ]
+                   │
+                   ▼
 ┌──────────────────────────────────────┐
 │  VM1 — Frontend Server               │
 │  Apache2 + PHP  │  192.168.100.24    │
