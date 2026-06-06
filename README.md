@@ -16,8 +16,10 @@
 > Tugas Besar Komputasi Awan
 
 </div>
+
 ---
-##  II. Arsitektur Sistem (3-Tier Architecture)
+
+## II. Arsitektur Sistem
 
 ```
          [ Browser / Internet ]
