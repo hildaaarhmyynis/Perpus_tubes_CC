@@ -1,10 +1,20 @@
-# 📚 PERPUS — Sistem Perpustakaan Berbasis Cloud Computing
+# PERPUS — Sistem Perpustakaan Berbasis Cloud Computing
 
 > Sistem manajemen perpustakaan digital yang dibangun di atas arsitektur **3-Tier** dengan distribusi beban kerja ke tiga Virtual Machine terpisah, memastikan skalabilitas, keamanan, dan pemisahan tanggung jawab yang optimal.
 
 ---
+## I. Tim Pengembang
 
-## 🏗️ Arsitektur Sistem (3-Tier Architecture)
+| Nama | NIM |
+|------|-----|
+| Hilda Rahmayani S | 101032400010 |
+| Farah Fadhilah | 101032430007 |
+| Saraya Abharina | 101032400191 |
+
+>  Tugas Besar Komputasi Awan — Universitas Telkom
+
+---
+##  II. Arsitektur Sistem (3-Tier Architecture)
 
 ```
 [ Browser / Internet ]
@@ -27,7 +37,7 @@
 │  MySQL 8        │  192.168.100.29    │
 └──────────────────────────────────────┘
 ```
-## 🖥️ VM1 — Web Server *(Presentation Layer)*
+## VM1 — Web Server *(Presentation Layer)*
 
 **OS:** Ubuntu Server 22.04 LTS | **Software:** Apache2 + PHP 8.x | **IP:** `192.168.100.24` | **Port:** `80`, `443`
 
@@ -51,12 +61,12 @@ VM ini melayani semua request dari browser pengguna (mahasiswa & admin). Semua f
 | `admin/admin_dashboard.php` | Dashboard admin perpustakaan |
 
 ### Komunikasi
-- ✅ **Menerima** request dari: Browser pengguna (Internet)
-- ➡️ **Mengirim** request ke: VM2 (App Server) untuk proses bisnis
+-  **Menerima** request dari: Browser pengguna (Internet)
+-  **Mengirim** request ke: VM2 (App Server) untuk proses bisnis
 
 ---
 
-## ⚙️ VM2 — Application Server *(Business Logic Layer)*
+## VM2 — Application Server *(Business Logic Layer)*
 
 **OS:** Ubuntu Server 22.04 LTS | **Software:** PHP 8.x (PHP-FPM), Composer | **IP:** `192.168.100.92` | **Port:** `9000`
 
@@ -70,13 +80,13 @@ VM ini mengelola semua **logika bisnis**, pemrosesan data, dan koneksi ke databa
 | `ajax_issue_request.php` | Handler AJAX untuk proses permintaan peminjaman buku secara real-time |
 
 ### Komunikasi
-- ✅ **Menerima** request dari: VM1 (Web Server)
-- ➡️ **Mengirim** query ke: VM3 (Database Server)
-- 🚫 **Tidak** dapat diakses langsung dari internet (internal network only)
+-  **Menerima** request dari: VM1 (Web Server)
+-  **Mengirim** query ke: VM3 (Database Server)
+-  **Tidak** dapat diakses langsung dari internet (internal network only)
 
 ---
 
-## 🗄️ VM3 — Database Server *(Data Layer)*
+## VM3 — Database Server *(Data Layer)*
 
 **OS:** Ubuntu Server 22.04 LTS | **Software:** MySQL 8.x / MariaDB | **IP:** `192.168.100.29` | **Port:** `3306`
 
@@ -100,12 +110,12 @@ VM ini menyimpan **seluruh data aplikasi** perpustakaan. Hanya dapat diakses ole
 | `penalties` | Data denda keterlambatan |
 
 ### Komunikasi
-- ✅ **Menerima** koneksi dari: VM2 (App Server)
-- 🚫 **Tidak** dapat diakses dari VM1 maupun Internet
+-  **Menerima** koneksi dari: VM2 (App Server)
+-  **Tidak** dapat diakses dari VM1 maupun Internet
 
 ---
 
-## 📦 Distribusi File per VM
+## Distribusi File per VM
 
 | File | VM | Layer |
 |------|----|-------|
@@ -128,7 +138,7 @@ VM ini menyimpan **seluruh data aplikasi** perpustakaan. Hanya dapat diakses ole
 
 ---
 
-## 🧰 Prasyarat
+## III. Prasyarat
 
 Pastikan sudah tersedia sebelum mulai:
 
@@ -139,16 +149,16 @@ Pastikan sudah tersedia sebelum mulai:
 | Terminal | Mac: Terminal / iTerm — Windows: PowerShell |
 | RAM minimal 6 GB | Disarankan 8 GB agar 3 VM berjalan lancar |
 
-## 🔄 Alur Request
-1. 🌐  User buka browser          →  hit VM1 (Web Server / Apache2)
-2. ⚙️  VM1 butuh data/proses      →  panggil VM2 (App Server / PHP-FPM)
-3. 🗄️  VM2 butuh data             →  query ke VM3 (Database / MySQL)
-4. ↩️  Response mengalir balik    →  VM3 → VM2 → VM1 → Browser
+##  Alur Request
+1.   User buka browser          →  hit VM1 (Web Server / Apache2)
+2.   VM1 butuh data/proses      →  panggil VM2 (App Server / PHP-FPM)
+3.   VM2 butuh data             →  query ke VM3 (Database / MySQL)
+4.   Response mengalir balik    →  VM3 → VM2 → VM1 → Browser
 ---
-> 💡 **Urutan setup wajib diikuti:** VM3 (Database) → VM2 (Backend) → VM1 (Frontend)
+>  **Urutan setup wajib diikuti:** VM3 (Database) → VM2 (Backend) → VM1 (Frontend)
 
 ---
-## 📋 Langkah 1 — Persiapan VirtualBox
+##  Langkah 1 — Persiapan VirtualBox
 
 ### 1.1 Cek nama adapter WiFi
 ```bash
@@ -164,7 +174,7 @@ cd ~/vbox-perpus
 
 ---
 
-## 🖥️ Langkah 2 — Buat 3 VM via Terminal
+##  Langkah 2 — Buat 3 VM via Terminal
 
 > Ganti `en0: Wi-Fi` dengan nama adapter WiFi kamu, dan sesuaikan path ISO.
 
@@ -212,7 +222,7 @@ VBoxManage list vms
 
 ---
 
-## 🐧 Langkah 3 — Install Ubuntu di Tiap VM
+##  Langkah 3 — Install Ubuntu di Tiap VM
 
 Jalankan tiap VM satu per satu:
 ```bash
@@ -229,13 +239,13 @@ Ikuti proses instalasi Ubuntu Desktop:
 | Username | `ubuntu` |
 | Computer name | `vm1-frontend` / `vm2-backend` / `vm3-database` |
 
-> ⚠️ Catat password yang kamu buat — akan dipakai untuk SSH nanti.
+>  Catat password yang kamu buat — akan dipakai untuk SSH nanti.
 
 Setelah install selesai dan restart, ulangi untuk VM2 dan VM3.
 
 ---
 
-## 🔑 Langkah 4 — Setup SSH di Tiap VM
+##  Langkah 4 — Setup SSH di Tiap VM
 
 Lakukan di **jendela VirtualBox** masing-masing VM:
 
@@ -253,11 +263,11 @@ sudo systemctl restart ssh
 ip a
 ```
 
-> 📝 Catat IP masing-masing VM dari output `ip a` — akan dipakai di langkah berikutnya.
+>  Catat IP masing-masing VM dari output `ip a` — akan dipakai di langkah berikutnya.
 
 ---
 
-## 💤 Langkah 5 — Jalankan VM Headless (Tanpa Jendela)
+##  Langkah 5 — Jalankan VM Headless (Tanpa Jendela)
 
 Setelah install selesai, VM bisa dijalankan di background tanpa membuka jendela:
 
@@ -275,7 +285,7 @@ VBoxManage startvm "PERPUS-VM3-Database" --type headless
 
 ---
 
-## 🖥️ Langkah 6 — Setup VM1 (Frontend)
+##  Langkah 6 — Setup VM1 (Frontend)
 
 ```bash
 # SSH ke VM1
@@ -295,7 +305,7 @@ sudo systemctl restart apache2
 exit
 ```
 
-### Upload file ke VM1
+###  Upload file ke VM1
 
 Jalankan dari terminal **lokal** (bukan dari dalam VM):
 ```bash
@@ -363,7 +373,7 @@ scp ./BACKEND/logout.php ubuntu@<IP-VM2>:/var/www/html/
 
 ---
 
-## 🗄️ Langkah 8 — Setup VM3 (Database)
+##  Langkah 8 — Setup VM3 (Database)
 
 ```bash
 # SSH ke VM3
@@ -411,23 +421,23 @@ ssh ubuntu@<IP-VM3> "sudo mysql librarydb < /home/ubuntu/librarydb.sql"
 
 ---
 
-## 🔍 Langkah 9 — Test Koneksi
+##  Langkah 9 — Test Koneksi
 
 ### Test koneksi VM2 → VM3
 ```bash
 ssh ubuntu@<IP-VM2>
 mysql -h <IP-VM3> -u perpususer -p
 # Masukkan password: Password123!
-# Kalau berhasil masuk ke MySQL = ✅ koneksi OK
+# Kalau berhasil masuk ke MySQL = koneksi OK
 ```
 
 ### Test aplikasi di browser
 http://<IP-VM1>
-Jika muncul halaman login PERPUS = ✅ instalasi berhasil!
+Jika muncul halaman login PERPUS = instalasi berhasil!
 
 ---
 
-## 🛠️ Langkah 10 — Perintah Manajemen VM
+##  Langkah 10 — Perintah Manajemen VM
 
 ```bash
 # Lihat semua VM
@@ -447,7 +457,7 @@ VBoxManage showvminfo "PERPUS-VM1-Frontend" | grep "State"
 ```
 
 ---
-## ❓ Troubleshooting
+## IV. Troubleshooting
 
 | Masalah | Penyebab | Solusi |
 |---------|----------|--------|
@@ -467,7 +477,7 @@ cat /var/log/apache2/error.log | tail -20
 
 ---
 
-## 🔐 Keamanan Jaringan
+##  V.  Keamanan Jaringan
 
 - **VM1** adalah satu-satunya titik yang terekspos ke internet publik.
 - **VM2** hanya dapat diakses melalui jaringan internal dari VM1.
@@ -476,7 +486,7 @@ cat /var/log/apache2/error.log | tail -20
 
 ---
 
-## 🚀 Teknologi yang Digunakan
+## VI. Teknologi yang Digunakan
 
 | Komponen | Teknologi |
 |----------|-----------|
@@ -491,7 +501,7 @@ cat /var/log/apache2/error.log | tail -20
 
 ---
 
-## 🔑 Akun Default
+## VII. Akun Default
 
 | Role | Username | Password |
 |------|----------|----------|
